@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  db:
+      image: mysql:5.7.30
+      volumes:
+        - db_data:/var/lib/mysql
+      restart: always
+      environment:
+        MYSQL_ROOT_PASSWORD: identityiq
+        MYSQL_DATABASE: identityiq   
+        MYSQL_USER: identityiq
+        MYSQL_PASSWORD: password
+  iiq:
+      build: ./iiq-build
+      image: sailpoint-iiq
+      privileged: true
+      ports:
+        - "8085:8080"
+        - "9009:8009"
+      environment:
+        MYSQL_HOST: db
+        MYSQL_ROOT_PASSWORD: identityiq
+        MYSQL_DATABASE: identityiq   
+        MYSQL_USER: identityiq
+        MYSQL_PASSWORD: password
+      depends_on:
+        - db
+      volumes:
+        - type: volume
+          source: iiqvolume
+          target: /opt/tomcat/webapps/
+          read_only: false
+      links:
+        - db
+
+volumes:
+  iiqvolume:
+  db_data:
