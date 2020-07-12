@@ -19,7 +19,10 @@ Includes:
  - mysql 5.7.30 database
  
 ## Docker
-Get started with docker for Windows here: https://docs.docker.com/engine/installation/windows/
+Get started with docker here: https://docs.docker.com/engine/
+
+[Docker Installation steps on linux](https://cwiki.apache.org/confluence/pages/viewpage.action?pageId=94798094)
+
 ## Volumes
 Exports a volume on `/opt/tomcat/webapps` (if you use this, you need to expand your identityiq.war manually to that directory.
 You can mount the volume on startup to a local directory containing your war file or exploded war directory.
